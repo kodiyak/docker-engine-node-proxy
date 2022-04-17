@@ -26,8 +26,6 @@ router.all(`/docker/*`, (req, res) => {
       res.status(200).send(dockerResponse);
     }
   );
-
-  res.json(request);
 });
 
 app.use(json());
