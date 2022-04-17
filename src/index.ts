@@ -12,6 +12,9 @@ router.all(`/docker/*`, (req, res) => {
   modem.dial(
     {
       ...req.body.dial,
+      statusCodes: {
+        200: "Salve true",
+      },
     },
     (err, dockerResponse) => {
       console.log("DOCKER DIAL", {
