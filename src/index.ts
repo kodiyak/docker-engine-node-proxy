@@ -14,10 +14,16 @@ router.all(`/docker/*`, (req, res) => {
       ...req.body.dial,
     },
     (err, dockerResponse) => {
+      console.log("DOCKER DIAL", {
+        err,
+        dockerResponse,
+      });
       if (err) {
         res.status(500).send(err);
       } else {
-        res.send(dockerResponse);
+        res.json({
+          dockerResponse: true,
+        });
       }
     }
   );
