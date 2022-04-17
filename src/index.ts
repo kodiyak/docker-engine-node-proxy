@@ -6,24 +6,19 @@ const app = express();
 const router = Router();
 
 router.all(`/docker/*`, (req, res) => {
-  const request = {
-    method: req.method,
-    path: req.url.replace("/docker", "*"),
-    dial: req.body.dial,
-  };
-
   const modem = new DockerModem({
     socketPath: "/var/run/docker.sock",
   });
   modem.dial(
     {
-      ...request.dial,
+      ...req.body.dial,
     },
     (err, dockerResponse) => {
       if (err) {
-        return res.status(500).send(err);
+        res.status(500).send(err);
+      } else {
+        res.send(dockerResponse);
       }
-      res.status(200).send(dockerResponse);
     }
   );
 });
